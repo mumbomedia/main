@@ -29,6 +29,9 @@ function route($route, $path_to_include){
   }  
   $request_url = filter_var($_SERVER['REQUEST_URI'], FILTER_SANITIZE_URL);
   $request_url = rtrim($request_url, '/');
+  if($_SERVER['DOCUMENT_ROOT'] != __DIR__){
+	  $request_url = str_replace('/'.basename(__DIR__), '', $request_url);
+  }
   $request_url = strtok($request_url, '?');
   $route_parts = explode('/', $route);
   $request_url_parts = explode('/', $request_url);
